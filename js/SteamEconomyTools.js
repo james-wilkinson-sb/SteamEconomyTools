@@ -28,17 +28,15 @@
 		if(currentItemDefFile < itemDefFilesToUpload.length)
 		{
 			var nextFile = itemDefFilesToUpload[ currentItemDefFile ];
+			currentUploadAttempts = 1;
 			processItemDefFile( nextFile );
 		}
 	}
 
 	function processItemDefFile( file )
 	{
-		console.log("Starting processing " + file.name);
-		currentUploadAttempts = 1;
-
 		var progressElement = $J('#setUpload_' + currentItemDefFile);
-		progressElement.html("Starting upload...");
+		progressElement.html("Uploading... Attempt " + currentUploadAttempts);
 
 		var elem = $J('#upload_item_defs');
 		var fd = new FormData(elem[0]);
@@ -88,7 +86,6 @@
 			uploadMultiple : true,
 			init: function () {
 				this.on('addedfile', function( file ){
-					console.log('added file:' + file);
 					itemDefFilesToUpload.push( file );
 				});
 			}
